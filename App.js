@@ -11,6 +11,8 @@ import {
   Keyboard,
   Platform
 } from "react-native";
+import Header from "../Todo-App/src/components/header"
+import Card from "../Todo-App/src/components/Card/Card.js"
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
@@ -18,6 +20,7 @@ const viewPadding = 10;
 export default class TodoList extends Component {
   state = {
     tasks: [],
+    todoList: [{ title: 'Task1' }, { title: "Task2" }, { title: "Task3" }],
     text: ""
   };
 
@@ -70,47 +73,35 @@ export default class TodoList extends Component {
   }
 
   render() {
-    return (
-      <View>
+    const { todoList } = this.state
 
-      <View
-        style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-      >
-        <FlatList
-          style={styles.list}
-          data={this.state.tasks}
-          renderItem={({ item, index }) => (
-            // <View>
-            //   <View style={styles.listItemCont}>
-            //     <Text style={styles.listItem}>{item.text}</Text>
-            //     <Button title="X" onPress={() => this.deleteTask(index)} />
-            //   </View>
-            //   <View style={styles.hr} />
-            // </View>
-            // Try setting `flexDirection` to `row`.
-            <View style={{ flex: 1, flexDirection: "row" }}>
-              <View
-                style={{ width: 5, height: 50, backgroundColor: "powderblue" }}
-              />
-              <View
-                style={{ width: 50, height: 50, backgroundColor: "skyblue" }}
-              />
-              <View
-                style={{ width: 50, height: 50, backgroundColor: "steelblue" }}
-              />
-            </View>
-          )}
-        />
-        <TextInput
-          style={styles.textInput}
-          onChangeText={this.changeTextHandler}
-          onSubmitEditing={this.addTask}
-          value={this.state.text}
-          placeholder="Add Tasks"
-          returnKeyType="done"
-          returnKeyLabel="done"
-        />
-      </View>
+    console.log(this.state)
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+          {todoList && todoList.map((todoItem) => {
+            return <Card CardTitle={todoItem.title}><Header /></Card>
+          })
+          }
+
+
+        </View>
+
+
+
+        <View
+          style={[styles.container, { paddingBottom: this.state.viewPadding }]}
+        >
+          <TextInput
+            style={styles.textInput}
+            onChangeText={this.changeTextHandler}
+            onSubmitEditing={this.addTask}
+            value={this.state.text}
+            placeholder="Add Tasks"
+            returnKeyType="done"
+            returnKeyLabel="done"
+          />
+        </View>
       </View>
 
     );
