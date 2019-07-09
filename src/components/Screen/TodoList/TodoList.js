@@ -11,8 +11,8 @@ import {
   Keyboard,
   Platform
 } from "react-native";
-import Header from "../Todo-App/src/components/header"
-import Card from "../Todo-App/src/components/Card/Card.js"
+import Header from "../../header.js";
+import Card from "../../Card/Card.js";
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;

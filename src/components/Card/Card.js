@@ -7,14 +7,14 @@ import {
 
 class Card extends Component {
     render() {
-        const { CardTitle } = this.props
+        const { cardTitle, cardInfo } = this.props
         return (
             <View style={[styles.container]}>
                 <View style={styles.cardTitle}>
-                    <Text>{CardTitle}</Text>
+                    <Text>{cardTitle}</Text>
                 </View>
                 <View style={styles.cardSection}>
-                    {this.props.children}
+                    <Text>{cardInfo}</Text>
                 </View>
 
 
