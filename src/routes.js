@@ -9,10 +9,16 @@ const AppNavigator = createStackNavigator({
     },
     Login: {
         screen: LoginScreen,
+        navigationOptions:{
+            title:"Login",
+        },
     },
     TodoList: {
-        screen: TodoList
-    }
+        screen: TodoList,
+        navigationOptions:{
+            title:"TodoList"
+        }
+    },
 });
 
 const AppContainer = createAppContainer(AppNavigator);
