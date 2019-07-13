@@ -36,7 +36,7 @@ export default class TodoList extends Component {
         id:todoLength,
         title: this.state.text,
         info: this.state.selectedDate,
-        strike: false
+        isComplete: false
       }
       const UpdatedTodoList = [...this.state.todoList, addTodoData];
       Tasks.save(UpdatedTodoList)
@@ -80,13 +80,13 @@ export default class TodoList extends Component {
   onCancel = () => {
     this.setState({ show: false })
   }
-  onStrike = (id) => {
+  onComplete = (id) => {
     console.log(id, "id");
     const { todoList } = this.state;
     const updatedTodoList = todoList.map((item) => {
       if (item.id && item.id == id) {
         console.log(item)
-        return ({ ...item, strike: !item.strike })
+        return ({ ...item, isComplete: !item.isComplete })
       } else {
         return item
       }
@@ -117,7 +117,7 @@ export default class TodoList extends Component {
         </View>
         <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
           {sortedList && sortedList.map((todoItem, index) => {
-            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info} strike={todoItem.strike} key={index} id={todoItem.id} onStrike={() => { this.onStrike(todoItem.id) }} />
+            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info} isComplete={todoItem.isComplete} key={index} id={todoItem.id} onComplete={() => { this.onComplete(todoItem.id) }} />
           })
           }
         </View>

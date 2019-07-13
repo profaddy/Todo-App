@@ -8,10 +8,10 @@ import {
 
 class Card extends Component {
     render() {
-        const { cardTitle, cardInfo, strike, onStrike } = this.props
-        const strikeStyles = strike === true ? styles.strikeLine : {}
+        const { cardTitle, cardInfo, isComplete, onComplete } = this.props
+        const strikeStyles = isComplete === true ? styles.strikeLine : {}
         return (
-            <TouchableWithoutFeedback onPress={onStrike}>
+            <TouchableWithoutFeedback onPress={onComplete}>
                 <View style={[styles.container, strikeStyles]} >
                     <View style={styles.cardTitle}>
                         <Text style={[styles.cardFont, strikeStyles]}>{cardTitle}</Text>
