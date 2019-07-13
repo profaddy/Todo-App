@@ -1,9 +1,12 @@
-import React  from "react";
+import React, {Component}  from "react";
 import DateTimePicker from "react-native-modal-datetime-picker";
 
 
-const DateTimePickerTester = ({ show, onCancel, onConfirm, mode }) => (
-    <>
+class DateTimePickerTester extends Component {
+ render() {
+    const { show, onCancel, onConfirm, mode } = this.props
+     return (
+     <>
         <DateTimePicker
             isVisible={show}
             onConfirm={onConfirm}
@@ -12,5 +15,6 @@ const DateTimePickerTester = ({ show, onCancel, onConfirm, mode }) => (
         />
     </>
 );
+}}
 
 export default DateTimePickerTester;

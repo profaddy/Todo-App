@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import {
-  AppRegistry,
   StyleSheet,
-  Text,
   View,
-  FlatList,
   AsyncStorage,
-  Button,
   TextInput,
   Keyboard,
   TouchableOpacity,
@@ -16,7 +12,6 @@ import moment from "moment"
 import Header from "../../header.js";
 import Card from "../../Card/Card.js";
 import DateTimePickerTester from "../../Fields/DateTimePicker/DateTimePicker"
-import { thisTypeAnnotation } from "@babel/types";
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
@@ -24,7 +19,7 @@ const viewPadding = 10;
 export default class TodoList extends Component {
   state = {
     tasks: [],
-    todoList: [{ title: 'Task1', info: '12:00 AM' }, { title: "Task2", info: '10:00 PM' }, { title: "Task3", info: '5:00 AM' }],
+    todoList: [],
     text: "",
     show: false,
     selectedDate: ""
@@ -42,11 +37,13 @@ export default class TodoList extends Component {
       }
       const UpdatedTodoList = [...this.state.todoList, addTodoData];
       Tasks.save(UpdatedTodoList)
-      this.setState({ todoList: UpdatedTodoList, text: "" })
+      console.log(AsyncStorage.getItem("TODOS"),'test tasks')
+      this.setState({ todoList: UpdatedTodoList, text: "",show:false})
     })
 
   }
   addTask = () => {
+    console.log('test addtask')
     this.setState({ show: true })
   };
 
@@ -63,7 +60,7 @@ export default class TodoList extends Component {
     );
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     Keyboard.addListener(
       isAndroid ? "keyboardDidShow" : "keyboardWillShow",
       e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
@@ -73,8 +70,8 @@ export default class TodoList extends Component {
       isAndroid ? "keyboardDidHide" : "keyboardWillHide",
       () => this.setState({ viewPadding: viewPadding })
     );
-
-    Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
+      const todoList = await Tasks.all();
+      this.setState({ todoList: todoList || [] })
   }
 
   onCancel = () => {
@@ -83,20 +80,9 @@ export default class TodoList extends Component {
 
   render() {
     const { todoList } = this.state
-
-    console.log(this.state.tasks)
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
-          {todoList && todoList.map((todoItem) => {
-            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info}><Header /></Card>
-          })
-          }
-        </View>
-        <View>
-          <DateTimePickerTester show={this.state.show} onCancel={this.onCancel} onConfirm={this.onConfirm} mode={"datetime"} />
-        </View>
-        <View >
+      <View style={styles.container}>
+                <View style={styles.InputContainer}>
           <TouchableOpacity>
 
             <TextInput
@@ -109,41 +95,49 @@ export default class TodoList extends Component {
               returnKeyLabel="done"
             />
           </TouchableOpacity>
-
+        </View>
+        <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
+          {todoList && todoList.map((todoItem) => {
+            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info}><Header /></Card>
+          })
+          }
+        </View>
+        <View>
+          <DateTimePickerTester show={this.state.show} onCancel={this.onCancel} onConfirm={this.onConfirm} mode={"datetime"} />
         </View>
       </View>
-
     );
   }
 }
 
 let Tasks = {
-  convertToArrayOfObject(tasks, callback) {
-    return callback(
-      tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
-    );
+
+  async all() {
+    try {
+      const result = await AsyncStorage.getItem("TODOS")
+      return JSON.parse(result)
+    } catch (error) {
+      console.error(error);
+    }
+
   },
-  convertToStringWithSeparators(tasks) {
-    return tasks.map(task => task.text).join("||");
-  },
-  all(callback) {
-    return AsyncStorage.getItem("TODOS", (err, todos) =>
-      this.convertToArrayOfObject(todos, callback)
-    );
-  },
-  save(todos) {
-    AsyncStorage.setItem("TODOS", this.convertToStringWithSeparators(todos));
+  async save(todos) {
+    try {
+      console.log('test')
+      const result = await AsyncStorage.setItem("TODOS", JSON.stringify(todos))
+      return result
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
-    padding: viewPadding,
-    // paddingTop: 20
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:"#F5F5F5", 
   },
   list: {
     width: "100%"
@@ -163,11 +157,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   textInput: {
-    height: 40,
-    paddingRight: 10,
-    paddingLeft: 10,
-    borderColor: "gray",
+    alignItems:"flex-start",
+    width:"100%",
+    padding:10,
+    borderColor: "grey",
     borderWidth: isAndroid ? 0 : 1,
-    width: "100%"
+    backgroundColor:"white",
+    width: "100%",
+    fontSize:20
+  },
+  InputContainer:{
+    width:"100%",
+    paddingLeft:20,
+    paddingRight:20,
+    marginTop:20,
+    borderRadius: 2,
+    height:40
   }
 });
