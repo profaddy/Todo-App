@@ -7,6 +7,7 @@ import {
   Keyboard,
   TouchableOpacity,
   Platform,
+  FlatList
 } from "react-native";
 import moment from "moment"
 import sortBy from "lodash/sortBy"
@@ -96,31 +97,34 @@ export default class TodoList extends Component {
   }
   render() {
     const { todoList } = this.state;
-    const sortedList = sortBy(todoList, function (o) { return new moment(o.info, "Do MMM YY hh:mm A"); }).reverse();
-    console.log(sortedList, 'sortedList');
+    const sortedList = sortBy(todoList, function (o) { return new moment(o.info, "Do MMM YY hh:mm A"); });
 
+    const test = sortedList.reverse();
     return (
       <View style={styles.container}>
                 <View style={styles.InputContainer}>
           <TouchableOpacity>
-
             <TextInput
               style={styles.textInput}
               onChangeText={this.changeTextHandler}
               onSubmitEditing={this.addTask}
               value={this.state.text}
-              placeholder="Add Tasks"
+              placeholder="Type to Add Task ..."
               returnKeyType="done"
               returnKeyLabel="done"
             />
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
-          {sortedList && sortedList.map((todoItem, index) => {
-            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info} isComplete={todoItem.isComplete} key={index} id={todoItem.id} onComplete={() => { this.onComplete(todoItem.id) }} />
-          })
-          }
-        </View>
+        <FlatList
+          style={styles.list}
+          data={test}
+          renderItem={({ item, index }) => (
+
+            <View style={styles.listContainer}>
+              <Card cardTitle={item.title} cardInfo={item.info} isComplete={item.isComplete} key={index} id={item.id} onComplete={() => { this.onComplete(item.id) }} />
+            </View>
+          )}
+        />
         <View>
           <DateTimePickerTester show={this.state.show} onCancel={this.onCancel} onConfirm={this.onConfirm} mode={"datetime"} />
         </View>
@@ -158,8 +162,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor:"#F5F5F5", 
   },
+  lisContainer:{
+    flex: 1, 
+    alignItems: 'center',
+    padding: 10, 
+  },
   list: {
-    width: "100%"
+    width: "100%",
+    margin:20
   },
   listItem: {
     paddingTop: 2,
@@ -176,21 +186,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   textInput: {
-    alignItems:"flex-start",
-    width:"100%",
-    padding:10,
+    margin:10,
     borderColor: "grey",
     borderWidth: isAndroid ? 0 : 1,
     backgroundColor:"white",
     width: "100%",
-    fontSize:20
+    fontSize:20,
+    borderWidth:2,
+    height:50,
+    padding:10,
+    borderColor:"blue",
   },
   InputContainer:{
     width:"100%",
-    paddingLeft:20,
     paddingRight:20,
     marginTop:20,
     borderRadius: 2,
-    height:40
   }
 });
