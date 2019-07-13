@@ -1,10 +1,14 @@
-import { createDrawerNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import LoginScreen from "../src/components/Screen/LoginScreen";
+import SplashScreen from "../src/components/Screen/SplashScreen/SplashScreen";
 import TodoList from "../src/components/Screen/TodoList/TodoList"
 
-const AppNavigator = createDrawerNavigator({
+const AppNavigator = createStackNavigator({
+    Splash:{
+        screen:SplashScreen,
+    },
     Login: {
-        screen: LoginScreen
+        screen: LoginScreen,
     },
     TodoList: {
         screen: TodoList

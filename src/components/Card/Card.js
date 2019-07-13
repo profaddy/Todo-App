@@ -16,8 +16,6 @@ class Card extends Component {
                 <View style={styles.cardSection}>
                     <Text>{cardInfo}</Text>
                 </View>
-
-
             </View>
         );
     }
@@ -28,12 +26,12 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 2,
         borderWidth: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         borderColor: 'blue',
         flexDirection: 'row',
         padding: 20,
-        margin: 5
+        margin: 5,
+        maxHeight: 20
 
     },
     cardTitle: {
