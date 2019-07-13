@@ -6,10 +6,10 @@ import {
   TextInput,
   Keyboard,
   TouchableOpacity,
-  Platform
+  Platform,
 } from "react-native";
 import moment from "moment"
-import Header from "../../header.js";
+import sortBy from "lodash/sortBy"
 import Card from "../../Card/Card.js";
 import DateTimePickerTester from "../../Fields/DateTimePicker/DateTimePicker"
 
@@ -30,10 +30,13 @@ export default class TodoList extends Component {
   };
   onConfirm = (date) => {
     const selectedDate = moment(date).format("Do MMM YY hh:mm A");
+    const todoLength = this.state.todoList.length 
     this.setState({ selectedDate }, () => {
       const addTodoData = {
+        id:todoLength,
         title: this.state.text,
-        info: this.state.selectedDate
+        info: this.state.selectedDate,
+        strike: false
       }
       const UpdatedTodoList = [...this.state.todoList, addTodoData];
       Tasks.save(UpdatedTodoList)
@@ -77,9 +80,25 @@ export default class TodoList extends Component {
   onCancel = () => {
     this.setState({ show: false })
   }
-
+  onStrike = (id) => {
+    console.log(id, "id");
+    const { todoList } = this.state;
+    const updatedTodoList = todoList.map((item) => {
+      if (item.id && item.id == id) {
+        console.log(item)
+        return ({ ...item, strike: !item.strike })
+      } else {
+        return item
+      }
+    });
+    console.log(updatedTodoList, 'updatedTodoList');
+    this.setState({ todoList: updatedTodoList })
+  }
   render() {
-    const { todoList } = this.state
+    const { todoList } = this.state;
+    const sortedList = sortBy(todoList, function (o) { return new moment(o.info, "Do MMM YY hh:mm A"); }).reverse();
+    console.log(sortedList, 'sortedList');
+
     return (
       <View style={styles.container}>
                 <View style={styles.InputContainer}>
@@ -97,8 +116,8 @@ export default class TodoList extends Component {
           </TouchableOpacity>
         </View>
         <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
-          {todoList && todoList.map((todoItem) => {
-            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info}><Header /></Card>
+          {sortedList && sortedList.map((todoItem, index) => {
+            return <Card cardTitle={todoItem.title} cardInfo={todoItem.info} strike={todoItem.strike} key={index} id={todoItem.id} onStrike={() => { this.onStrike(todoItem.id) }} />
           })
           }
         </View>

@@ -3,20 +3,24 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableWithoutFeedback
 } from 'react-native'
 
 class Card extends Component {
     render() {
-        const { cardTitle, cardInfo } = this.props
+        const { cardTitle, cardInfo, strike, onStrike } = this.props
+        const strikeStyles = strike === true ? styles.strikeLine : {}
         return (
-            <View style={[styles.container]}>
-                <View style={styles.cardTitle}>
-                    <Text style={styles.cardFont}>{cardTitle}</Text>
+            <TouchableWithoutFeedback onPress={onStrike}>
+                <View style={[styles.container, strikeStyles]} >
+                    <View style={styles.cardTitle}>
+                        <Text style={[styles.cardFont, strikeStyles]}>{cardTitle}</Text>
+                    </View>
+                    <View style={styles.cardSection}>
+                        <Text style={styles.cardFont}>{cardInfo}</Text>
+                    </View>
                 </View>
-                <View style={styles.cardSection}>
-                    <Text>{cardInfo}</Text>
-                </View>
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
@@ -27,25 +31,29 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         shadowColor: 'black',
-        shadowOffset: { width: 10, height: 5 },
         shadowOpacity: 0.5,
         shadowRadius: 5,
         alignItems: 'center',
         flexDirection: 'row',
         padding: 20,
         margin: 5,
-        maxHeight: 40,
-        backgroundColor:"#FEFEFE"
+        backgroundColor:"#FEFEFE",
 
     },
     cardFont:{
-        fontSize:20
+        fontSize:17,
+        fontFamily:"Verdana"
     },
     cardTitle: {
-        flex: 3,
+        flex: 2,
     },
     cardSection: {
         flex: 1,
+    },
+    strikeLine:{
+        textDecorationLine: 'line-through',
+        textDecorationStyle: 'solid',
+        opacity:0.5
     }
 });
 

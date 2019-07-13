@@ -9,6 +9,7 @@
   "dependencies": {
     "cross-env": "^5.2.0",
     "eslint-config-rallycoding": "^3.2.0",
+    "lodash": "^4.17.14",
     "moment": "^2.24.0",
     "react": "16.8.3",
     "react-native": "0.59.3",
