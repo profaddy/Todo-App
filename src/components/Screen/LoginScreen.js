@@ -6,6 +6,7 @@ import {
     Button,
     TextInput
 } from 'react-native';
+import {save} from "../utils/AsyncStorageHelpers"
 class LoginScreen extends Component {
 
     constructor() {
@@ -16,10 +17,12 @@ class LoginScreen extends Component {
         };
     }
 
-    onSubmit = () => {
+     onSubmit = async () => {
         const { username, password } = this.state
         if (username === "admin" && password === "admin") {
-            this.props.navigation.navigate("TodoList");
+            const userDetails = {username,password}
+            await save('userToken',userDetails );
+            this.props.navigation.navigate("App");
         };
     }
     render() {

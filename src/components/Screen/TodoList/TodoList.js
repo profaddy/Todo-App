@@ -41,7 +41,6 @@ export default class TodoList extends Component {
       }
       const UpdatedTodoList = [...this.state.todoList, addTodoData];
       Tasks.save(UpdatedTodoList)
-      console.log(AsyncStorage.getItem("TODOS"),'test tasks')
       this.setState({ todoList: UpdatedTodoList, text: "",show:false})
     })
 
@@ -85,7 +84,7 @@ export default class TodoList extends Component {
     console.log(id, "id");
     const { todoList } = this.state;
     const updatedTodoList = todoList.map((item) => {
-      if (item.id && item.id == id) {
+      if (item.id == id) {
         console.log(item)
         return ({ ...item, isComplete: !item.isComplete })
       } else {
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor:"#F5F5F5", 
+    // backgroundColor:"#F5F5F5", 
   },
   lisContainer:{
     flex: 1, 

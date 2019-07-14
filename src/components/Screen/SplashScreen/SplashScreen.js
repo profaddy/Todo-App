@@ -1,9 +1,10 @@
-import * as React  from 'react';
+import * as React from 'react';
 import {
     StyleSheet,
     Text,
     View
 } from 'react-native';
+import { all } from "../../utils/AsyncStorageHelpers";
 class SplashScreen extends React.Component {
 
     constructor() {
@@ -12,11 +13,12 @@ class SplashScreen extends React.Component {
             username: "",
             password: ""
         };
+        this.navigateToApp();
     }
 
-    componentDidMount = () => {
-        console.log(this.props);
-        this.props.navigation.navigate("Login")
+    navigateToApp = async () => {
+        const userToken = await all('userToken');
+        this.props.navigation.navigate(userToken ? 'App' : 'Auth');
     }
 
     onSubmit = () => {
@@ -40,13 +42,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        // padding: 20,
         width: "100%",
-        // margin: 10,
-        backgroundColor:'orange'
+        backgroundColor: 'orange'
     },
     text: {
-        color:"white"
+        color: "white"
     },
 })
 

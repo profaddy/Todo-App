@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderRadius: 2,
-        borderWidth: 1,
+        borderWidth: 0,
         shadowColor: 'red',
         shadowOpacity: 20,
         shadowRadius: 5,
@@ -37,12 +37,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 20,
         margin: 10,
-        backgroundColor:"#FEFEFE",
+        backgroundColor:"#EBEBEB",
 
     },
     cardFont:{
-        fontSize:17,
-        fontFamily:"Verdana"
+        fontSize:20,
+        fontFamily:"Verdana",
+        fontWeight:"bold"
     },
     cardTitle: {
         flex: 2,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     strikeLine:{
         textDecorationLine: 'line-through',
         textDecorationStyle: 'solid',
-        opacity:0.5
+        opacity:0.7
     }
 });
 
