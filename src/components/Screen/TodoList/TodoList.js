@@ -13,6 +13,7 @@ import moment from "moment"
 import sortBy from "lodash/sortBy"
 import Card from "../../Card/Card.js";
 import DateTimePickerTester from "../../Fields/DateTimePicker/DateTimePicker"
+import MenuButton from "../../utils/DrawerHelpers"
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
@@ -26,10 +27,17 @@ export default class TodoList extends Component {
     selectedDate: ""
   };
 
+//   static navigationOptions = () => ({
+//     drawerIcon:() => {console.log("test")},
+//     headerLeft:(navigation) => { console.log(navigation,"headerleft");return MenuButton(navigation)},
+// })
+
   changeTextHandler = text => {
     this.setState({ text: text });
   };
   onConfirm = (date) => {
+    this.props.navigation.navigate('DrawerOpen')
+
     const selectedDate = moment(date).format("Do MMM YY hh:mm A");
     const todoLength = this.state.todoList.length 
     this.setState({ selectedDate }, () => {

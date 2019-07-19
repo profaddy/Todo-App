@@ -1,35 +1,39 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator } from "react-navigation";
 import LoginScreen from "../src/components/Screen/LoginScreen";
 import SplashScreen from "../src/components/Screen/SplashScreen/SplashScreen";
+import Home from "../src/components/Screen/Home/Home"
 import TodoList from "../src/components/Screen/TodoList/TodoList";
+import DrawerScreen from "../src/components/Screen/DrawerScreen/DrawerScreen";
+import MenuButton from "../src/components/utils/DrawerHelpers"
 
-const AppStack = createStackNavigator({
-    TodoList: {
-        screen: TodoList,
-        navigationOptions: {
-            title: "TodoList",
+const AppStack = createStackNavigator(
+    {
+        Home: {
+            screen: Home
         },
-    },
-
+        TodoList: {
+            screen: TodoList,
+        },
     },{
-        headerLayoutPreset: 'center',
-    },{
-        naviagtionOtions: () => ({ headerLeft: "test" })
-    },{
-
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: "#EBEBEB",
-            },
-        }
+            defaultNavigationOptions: {
+                headerStyle: {
+                    backgroundColor: "##49C4A8",
+                },
+                headerLayoutPreset: 'center',
+            }
 });
 
-const DrawerContainer = createDrawerNavigator(
-    {
-        Home: AppStack
-    },{
+const DrawerContainer = createDrawerNavigator({
+    Home:{
+        screen: AppStack,
+    },
+    TodoList: {
+        screen: TodoList,
+    },
+},{
         initialRouteName: 'Home',
-        drawerPosition: "right",
+        contentComponent: DrawerScreen,
+        drawerPosition: "left",
         drawerWidth: 200
     }
 )

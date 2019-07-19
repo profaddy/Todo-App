@@ -5,14 +5,36 @@ import {
     View,
     TouchableWithoutFeedback
 } from 'react-native'
+import moment from "moment"
+
+
 
 class Card extends Component {
+    isCurrentTimeElapsed = time => {
+        const currentTime = moment().format("Do MMM YY hh:mm A");
+        if(time > currentTime){
+            return false
+        }else{
+            return true
+        }
+    }
+
+    getStyles = () => {
+        const {isComplete,cardInfo} = this.props;
+        if(!isComplete && this.isCurrentTimeElapsed(cardInfo) === true){
+            return {...styles.container,...{backgroundColor:"red"}}
+        }else{
+            return {...styles.container}
+        }
+    }
     render() {
         const { cardTitle, cardInfo, isComplete, onComplete } = this.props
+        const mergedContainerDtyles  = this.getStyles()
         const strikeStyles = isComplete === true ? styles.strikeLine : {}
+         
         return (
             <TouchableWithoutFeedback onPress={onComplete}>
-                <View style={[styles.container, strikeStyles]} >
+                <View style={mergedContainerDtyles} >
                     <View style={styles.cardTitle}>
                         <Text style={[styles.cardFont, strikeStyles]}>{cardTitle}</Text>
                     </View>
