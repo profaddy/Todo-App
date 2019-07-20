@@ -1,10 +1,9 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator } from "react-navigation";
-import LoginScreen from "../src/components/Screen/LoginScreen";
-import SplashScreen from "../src/components/Screen/SplashScreen/SplashScreen";
-import Home from "../src/components/Screen/Home/Home"
-import TodoList from "../src/components/Screen/TodoList/TodoList";
-import DrawerScreen from "../src/components/Screen/DrawerScreen/DrawerScreen";
-import MenuButton from "../src/components/utils/DrawerHelpers"
+import LoginScreen from "../src/Screens/LoginScreen";
+import SplashScreen from "../src/Screens/SplashScreen/SplashScreen";
+import Home from "../src/Screens/Home/Home"
+import TodoList from "../src/Screens/TodoList/TodoList";
+import DrawerScreen from "../src/Screens/DrawerScreen/DrawerScreen";
 
 const AppStack = createStackNavigator(
     {

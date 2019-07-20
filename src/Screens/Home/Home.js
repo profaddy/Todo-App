@@ -3,7 +3,6 @@ import {
   View,
   Text
 } from "react-native";
-import AppContainer from "../../../routes"
 
 import MenuButton from "../../utils/DrawerHelpers";
 
