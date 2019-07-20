@@ -13,23 +13,23 @@ const AppStack = createStackNavigator(
         TodoList: {
             screen: TodoList,
         },
-    },{
-            defaultNavigationOptions: {
-                headerStyle: {
-                    backgroundColor: "##49C4A8",
-                },
-                headerLayoutPreset: 'center',
-            }
-});
+    }, {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: "##49C4A8",
+            },
+            headerLayoutPreset: 'center',
+        }
+    });
 
 const DrawerContainer = createDrawerNavigator({
-    Home:{
+    Home: {
         screen: AppStack,
     },
     TodoList: {
         screen: TodoList,
     },
-},{
+}, {
         initialRouteName: 'Home',
         contentComponent: DrawerScreen,
         drawerPosition: "left",
@@ -51,7 +51,7 @@ const AppNavigator = createSwitchNavigator(
         AuthLoading: SplashScreen,
         App: DrawerContainer,
         Auth: AuthStack
-    },{
+    }, {
         initialRouteName: 'AuthLoading',
     }
 )

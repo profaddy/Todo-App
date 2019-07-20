@@ -17,7 +17,7 @@ const Header = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display:'flex',
+    display: 'flex',
   },
   textStyle: {
     color: 'red',

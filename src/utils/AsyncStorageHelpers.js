@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 
 export const all = async (StrorageKey) => {
-  console.log(AsyncStorage, 'AsyncStorage')
   try {
     const result = await AsyncStorage.getItem(`${StrorageKey}`);
     return result

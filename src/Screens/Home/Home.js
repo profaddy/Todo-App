@@ -10,17 +10,16 @@ export default class Home extends Component {
   state = {};
 
   static navigationOptions = () => ({
-    drawerIcon:() => {console.log("test")},
-    headerLeft:(navigation) => { console.log(navigation,"headerleft");return MenuButton(navigation)},
-})
+    drawerIcon: () => { console.log("test") },
+    headerLeft: (navigation) => { console.log(navigation, "headerleft"); return MenuButton(navigation) },
+  })
 
-  
+
   render() {
     return (
-        <View style={{flex:1,backgroundColor:"#49C4A8"}}>
-            {/* <AppContainer /> */}
-            <Text>My App</Text>
-        </View>
+      <View style={{ flex: 1, backgroundColor: "#49C4A8" }}>
+        <Text>My App</Text>
+      </View>
     );
-    }
+  }
 }

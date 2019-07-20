@@ -12,26 +12,26 @@ import moment from "moment"
 class Card extends Component {
     isCurrentTimeElapsed = time => {
         const currentTime = moment().format("Do MMM YY hh:mm A");
-        if(time > currentTime){
+        if (time > currentTime) {
             return false
-        }else{
+        } else {
             return true
         }
     }
 
     getStyles = () => {
-        const {isComplete,cardInfo} = this.props;
-        if(!isComplete && this.isCurrentTimeElapsed(cardInfo) === true){
-            return {...styles.container,...{backgroundColor:"red"}}
-        }else{
-            return {...styles.container}
+        const { isComplete, cardInfo } = this.props;
+        if (!isComplete && this.isCurrentTimeElapsed(cardInfo) === true) {
+            return { ...styles.container, ...{ backgroundColor: "red" } }
+        } else {
+            return { ...styles.container }
         }
     }
     render() {
         const { cardTitle, cardInfo, isComplete, onComplete } = this.props
-        const mergedContainerDtyles  = this.getStyles()
+        const mergedContainerDtyles = this.getStyles()
         const strikeStyles = isComplete === true ? styles.strikeLine : {}
-         
+
         return (
             <TouchableWithoutFeedback onPress={onComplete}>
                 <View style={mergedContainerDtyles} >
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 20,
         margin: 10,
-        backgroundColor:"#EBEBEB",
+        backgroundColor: "#EBEBEB",
 
     },
-    cardFont:{
-        fontSize:20,
-        fontFamily:"Verdana",
-        fontWeight:"bold"
+    cardFont: {
+        fontSize: 20,
+        fontFamily: "Verdana",
+        fontWeight: "bold"
     },
     cardTitle: {
         flex: 2,
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     cardSection: {
         flex: 1,
     },
-    strikeLine:{
+    strikeLine: {
         textDecorationLine: 'line-through',
         textDecorationStyle: 'solid',
-        opacity:0.7
+        opacity: 0.7
     }
 });
 

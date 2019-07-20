@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {NavigationActions} from 'react-navigation';
+import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import {ScrollView, Text, View} from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import styles from './styles';
 
 class DrawerScreen extends Component {
@@ -10,11 +10,10 @@ class DrawerScreen extends Component {
       routeName: route
     });
     this.props.navigation.dispatch(navigateAction);
-    this.props.navigation.navigate("DrawerClose")
+    this.props.navigation.navigate("DrawerClose");
   }
 
-  render () {
-      console.log(this.props.navigation,"drawer render")
+  render() {
     return (
       <View>
         <ScrollView>
@@ -26,12 +25,12 @@ class DrawerScreen extends Component {
             </View>
             <View style={styles.menuItem}>
               <Text onPress={this.navigateToScreen('TodoList')}>
-               About
+                About
               </Text>
             </View>
             <View style={styles.menuItem}>
               <Text onPress={this.navigateToScreen('TodoList')}>
-              Contact
+                Contact
               </Text>
             </View>
           </View>

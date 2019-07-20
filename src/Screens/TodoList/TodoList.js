@@ -28,10 +28,10 @@ export default class TodoList extends Component {
     selectedDate: ""
   };
 
-//   static navigationOptions = () => ({
-//     drawerIcon:() => {console.log("test")},
-//     headerLeft:(navigation) => { console.log(navigation,"headerleft");return MenuButton(navigation)},
-// })
+  //   static navigationOptions = () => ({
+  //     drawerIcon:() => {console.log("test")},
+  //     headerLeft:(navigation) => { console.log(navigation,"headerleft");return MenuButton(navigation)},
+  // })
 
   changeTextHandler = text => {
     this.setState({ text: text });
@@ -40,17 +40,17 @@ export default class TodoList extends Component {
     this.props.navigation.navigate('DrawerOpen')
 
     const selectedDate = moment(date).format("Do MMM YY hh:mm A");
-    const todoLength = this.state.todoList.length 
+    const todoLength = this.state.todoList.length
     this.setState({ selectedDate }, () => {
       const addTodoData = {
-        id:todoLength,
+        id: todoLength,
         title: this.state.text,
         info: this.state.selectedDate,
         isComplete: false
       }
       const UpdatedTodoList = [...this.state.todoList, addTodoData];
       Tasks.save(UpdatedTodoList)
-      this.setState({ todoList: UpdatedTodoList, text: "",show:false})
+      this.setState({ todoList: UpdatedTodoList, text: "", show: false })
     })
 
   }
@@ -82,8 +82,8 @@ export default class TodoList extends Component {
       isAndroid ? "keyboardDidHide" : "keyboardWillHide",
       () => this.setState({ viewPadding: viewPadding })
     );
-      const todoList = await Tasks.all();
-      this.setState({ todoList: todoList || [] })
+    const todoList = await Tasks.all();
+    this.setState({ todoList: todoList || [] })
   }
 
   onCancel = () => {
@@ -110,7 +110,7 @@ export default class TodoList extends Component {
     const test = sortedList.reverse();
     return (
       <View style={styles.container}>
-                <View style={styles.InputContainer}>
+        <View style={styles.InputContainer}>
           <TouchableOpacity>
             <TextInput
               style={styles.textInput}
@@ -170,14 +170,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor:"#F5F5F5", 
   },
-  lisContainer:{
-    flex: 1, 
+  lisContainer: {
+    flex: 1,
     alignItems: 'center',
-    padding: 10, 
+    padding: 10,
   },
   list: {
     width: "100%",
-    margin:20
+    margin: 20
   },
   listItem: {
     paddingTop: 2,
@@ -194,21 +194,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   textInput: {
-    margin:10,
+    margin: 10,
     borderColor: "grey",
     borderWidth: isAndroid ? 0 : 1,
-    backgroundColor:"white",
+    backgroundColor: "white",
     width: "100%",
-    fontSize:20,
-    borderWidth:2,
-    height:50,
-    padding:10,
-    borderColor:"blue",
+    fontSize: 20,
+    borderWidth: 2,
+    height: 50,
+    padding: 10,
+    borderColor: "blue",
   },
-  InputContainer:{
-    width:"100%",
-    paddingRight:20,
-    marginTop:20,
+  InputContainer: {
+    width: "100%",
+    paddingRight: 20,
+    marginTop: 20,
     borderRadius: 2,
   }
 });
