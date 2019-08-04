@@ -1,20 +1,42 @@
-import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator,createBottomTabNavigator } from "react-navigation";
 import LoginScreen from "../src/Screens/LoginScreen";
 import SplashScreen from "../src/Screens/SplashScreen/SplashScreen";
 import Home from "../src/Screens/Home/Home"
 import TodoList from "../src/Screens/TodoList/TodoList";
-import DrawerScreen from "../src/Screens/DrawerScreen/DrawerScreen";
+import MenuButton from "../src/utils/DrawerHelpers";
+import DrawerScreen from "../src//Screens/DrawerScreen/DrawerScreen";
+import Tab1 from "../src/components/Tabs/Tab1"
+import Tab2 from "../src/components/Tabs/Tab2"
 
-const AppStack = createStackNavigator(
-    {
+const Tabs = createBottomTabNavigator({
+    Tab1: Tab1,
+    Tab2: Tab2,
+},{
+    tabBarOptions: {
+        activeTintColor: '#000',
+        inactiveTintColor: 'gray',
+        style: {
+            backgroundColor: '#fff',
+        },
+        indicatorStyle: {
+            backgroundColor: '#000',
+        },
+    }
+});
+
+const AppStack = createStackNavigator({
         Home: {
             screen: Home
         },
         TodoList: {
             screen: TodoList,
         },
-    }, {
+        Tabs:{
+            screen:Tabs
+        }
+    },{
         defaultNavigationOptions: {
+            headerLeft: (navigation) => { console.log(navigation, "headerleft"); return MenuButton(navigation) },
             headerStyle: {
                 backgroundColor: "##49C4A8",
             },
@@ -36,6 +58,8 @@ const DrawerContainer = createDrawerNavigator({
         drawerWidth: 200
     }
 )
+
+
 
 const AuthStack = createStackNavigator({
     Login: {

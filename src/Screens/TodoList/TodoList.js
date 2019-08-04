@@ -28,10 +28,10 @@ export default class TodoList extends Component {
     selectedDate: ""
   };
 
-  //   static navigationOptions = () => ({
-  //     drawerIcon:() => {console.log("test")},
-  //     headerLeft:(navigation) => { console.log(navigation,"headerleft");return MenuButton(navigation)},
-  // })
+    static navigationOptions = () => ({
+      drawerIcon:() => {console.log("test")},
+      title:"TodoList",
+  })
 
   changeTextHandler = text => {
     this.setState({ text: text });

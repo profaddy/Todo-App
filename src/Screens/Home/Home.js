@@ -11,7 +11,6 @@ export default class Home extends Component {
 
   static navigationOptions = () => ({
     drawerIcon: () => { console.log("test") },
-    headerLeft: (navigation) => { console.log(navigation, "headerleft"); return MenuButton(navigation) },
   })
 
 
