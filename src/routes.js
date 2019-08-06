@@ -1,10 +1,10 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator,createBottomTabNavigator } from "react-navigation";
-import LoginScreen from "../src/Screens/LoginScreen";
-import SplashScreen from "../src/Screens/SplashScreen/SplashScreen";
+import LoginScreen from "./Screens/Common/LoginScreen/LoginScreen";
+import SplashScreen from "./Screens/Common/SplashScreen/SplashScreen";
 import Home from "../src/Screens/Home/Home"
 import TodoList from "../src/Screens/TodoList/TodoList";
 import MenuButton from "../src/utils/DrawerHelpers";
-import DrawerScreen from "../src//Screens/DrawerScreen/DrawerScreen";
+import DrawerScreen from "./Screens/Common/DrawerScreen/DrawerScreen";
 import Tab1 from "../src/components/Tabs/Tab1"
 import Tab2 from "../src/components/Tabs/Tab2"
 

@@ -4,21 +4,21 @@ import {
   Text
 } from "react-native";
 
-import MenuButton from "../../utils/DrawerHelpers";
+import styles from "./styles";
 
 export default class Home extends Component {
   state = {};
 
   static navigationOptions = () => ({
-    drawerIcon: () => { console.log("test") },
   })
 
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "#49C4A8" }}>
+      <View style={styles.container} >
         <Text>My App</Text>
       </View>
     );
   }
 }
+

@@ -19,8 +19,17 @@ export const save = async (StrorageKey, dataToSave) => {
   }
 }
 
+export const remove = async (StrorageKey) => {
+  try {
+    await AsyncStorage.removeItem(`${StrorageKey}`)
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 
 export default {
   all,
-  save
+  save,
+  remove
 };

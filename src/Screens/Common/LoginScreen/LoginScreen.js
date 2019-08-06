@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     Button,
     TextInput
 } from 'react-native';
-import { save } from "../utils/AsyncStorageHelpers"
+import { save } from "../../../utils/AsyncStorageHelpers"
+import styles from "./styles"
 class LoginScreen extends Component {
 
     constructor() {
@@ -56,28 +56,5 @@ class LoginScreen extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 20,
-        width: "100%",
-        margin: 10,
-    },
-    textInput: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#4D96F3',
-        width: 200
-    },
-    button: {
-        padding: 20,
-    },
-    greeting: {
-        fontSize: 30,
-        color: "#4D96F3"
-    }
-})
 
 export default LoginScreen;

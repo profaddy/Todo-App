@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
     container: {
@@ -15,6 +15,6 @@ export default styles = StyleSheet.create({
     menuItem: {
         padding: 10,
         borderWidth: 0.5,
-        borderColor: '#d6d7da'
+        borderColor: '#d6d7da',
     }
 });

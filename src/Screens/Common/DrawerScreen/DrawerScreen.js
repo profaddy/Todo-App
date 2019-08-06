@@ -3,14 +3,26 @@ import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { ScrollView, Text, View } from 'react-native';
 import styles from './styles';
+import { remove } from "../../../utils/AsyncStorageHelpers"
+
 
 class DrawerScreen extends Component {
-  navigateToScreen = (route) => () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: route
+
+   navigateAction = (route) => {
+     return NavigationActions.navigate({
+        routeName: route
     });
-    this.props.navigation.dispatch(navigateAction);
+}
+
+  navigateToScreen = (route) => () => {
+    this.props.navigation.dispatch(this.navigateAction(route));
     this.props.navigation.navigate("DrawerClose");
+  }
+
+  handleLogout =  async () => {
+    console.log("test",remove)
+     await remove('userToken');
+     this.props.navigation.dispatch(this.navigateAction("Login"));
   }
 
   render() {
@@ -33,12 +45,17 @@ class DrawerScreen extends Component {
                 Tabs
               </Text>
             </View>
+            <View style={styles.menuItem}>
+              <Text onPress={this.handleLogout}>
+                Logout
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </View>
     );
-  }
-}
+  }}
+
 
 DrawerScreen.propTypes = {
   navigation: PropTypes.object
