@@ -17,8 +17,8 @@ const Tabs = createBottomTabNavigator({
 
         tabBarIcon:() => {
             console.log("test")
-            const { routeName } = navigation;
-                return <ImageRenderer iconName={"TabOne"}/>
+            const { routeName } = navigation.state;
+            return <ImageRenderer iconName={"TabOne"}/>
             
         }
     })

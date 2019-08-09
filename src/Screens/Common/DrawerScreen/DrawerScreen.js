@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { ScrollView, Text, View } from 'react-native';
 import { remove } from "app/src/utils/AsyncStorageHelpers"
 import styles from './styles';
+
 class DrawerScreen extends Component {
 
    navigateAction = (route) => {
@@ -18,7 +19,6 @@ class DrawerScreen extends Component {
   }
 
   handleLogout =  async () => {
-    console.log("test",remove)
      await remove('userToken');
      this.props.navigation.dispatch(this.navigateAction("Login"));
   }
