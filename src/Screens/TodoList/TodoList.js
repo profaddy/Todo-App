@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import moment from "moment"
 import sortBy from "lodash/sortBy"
-import Card from "../../components/Card/Card.js";
-import DateTimePickerTester from "../../components/Fields/DateTimePicker/DateTimePicker"
+import Card from "app/src/components/Card/Card.js";
+import DateTimePickerTester from "app/src/components/Fields/DateTimePicker/DateTimePicker"
 
 
 

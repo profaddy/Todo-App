@@ -1,42 +1,54 @@
-import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator,createBottomTabNavigator } from "react-navigation";
-import LoginScreen from "./Screens/Common/LoginScreen/LoginScreen";
-import SplashScreen from "./Screens/Common/SplashScreen/SplashScreen";
-import Home from "../src/Screens/Home/Home"
-import TodoList from "../src/Screens/TodoList/TodoList";
-import MenuButton from "../src/utils/DrawerHelpers";
-import DrawerScreen from "./Screens/Common/DrawerScreen/DrawerScreen";
-import Tab1 from "../src/components/Tabs/Tab1"
-import Tab2 from "../src/components/Tabs/Tab2"
+import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator, createBottomTabNavigator } from "react-navigation";
+import LoginScreen from "app/src/Screens/Common/LoginScreen/LoginScreen";
+import SplashScreen from "app/src/Screens/Common/SplashScreen/SplashScreen";
+import Home from "app/src/Screens/Home/Home"
+import TodoList from "app/src/Screens/TodoList/TodoList";
+import MenuButton from "app/src/utils/DrawerHelpers";
+import DrawerScreen from "app/src/Screens/Common/DrawerScreen/DrawerScreen";
+import Tab1 from "app/src/components/Tabs/Tab1";
+import Tab2 from "app/src/components/Tabs/Tab2";
+import ImageRenderer from "app/src/utils/ImageRenderer";
 
 const Tabs = createBottomTabNavigator({
     Tab1: Tab1,
     Tab2: Tab2,
+}, {
+    defaultNavigationOptions:({navigation}) =>({
+
+        tabBarIcon:() => {
+            console.log("test")
+            const { routeName } = navigation;
+                return <ImageRenderer iconName={"TabOne"}/>
+            
+        }
+    })
 },{
-    tabBarOptions: {
-        activeTintColor: '#000',
-        inactiveTintColor: 'gray',
-        style: {
-            backgroundColor: '#fff',
-        },
-        indicatorStyle: {
-            backgroundColor: '#000',
-        },
-    }
-});
+        tabBarOptions: {
+            activeTintColor: '#000',
+            inactiveTintColor: 'gray',
+
+            style: {
+                backgroundColor: '#fff',
+            },
+            indicatorStyle: {
+                backgroundColor: '#000',
+            },
+        }
+    });
 
 const AppStack = createStackNavigator({
-        Home: {
-            screen: Home
-        },
-        TodoList: {
-            screen: TodoList,
-        },
-        Tabs:{
-            screen:Tabs
-        }
-    },{
+    Home: {
+        screen: Home
+    },
+    TodoList: {
+        screen: TodoList,
+    },
+    Tabs: {
+        screen: Tabs
+    }
+}, {
         defaultNavigationOptions: {
-            headerLeft: (navigation) => { console.log(navigation, "headerleft"); return MenuButton(navigation) },
+            headerLeft: (navigation) => MenuButton(navigation),
             headerStyle: {
                 backgroundColor: "##49C4A8",
             },
@@ -47,9 +59,6 @@ const AppStack = createStackNavigator({
 const DrawerContainer = createDrawerNavigator({
     Home: {
         screen: AppStack,
-    },
-    TodoList: {
-        screen: TodoList,
     },
 }, {
         initialRouteName: 'Home',

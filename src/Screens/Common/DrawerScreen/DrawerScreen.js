@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { ScrollView, Text, View } from 'react-native';
+import { remove } from "app/src/utils/AsyncStorageHelpers"
 import styles from './styles';
-import { remove } from "../../../utils/AsyncStorageHelpers"
-
-
 class DrawerScreen extends Component {
 
    navigateAction = (route) => {

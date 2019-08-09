@@ -3,7 +3,7 @@ import {
     Text,
     View
 } from 'react-native';
-import { all } from "../../../utils/AsyncStorageHelpers";
+import { all } from "app/src/utils/AsyncStorageHelpers";
 class SplashScreen extends React.Component {
 
     constructor() {

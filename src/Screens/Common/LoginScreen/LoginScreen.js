@@ -5,7 +5,7 @@ import {
     Button,
     TextInput
 } from 'react-native';
-import { save } from "../../../utils/AsyncStorageHelpers"
+import { save } from "app/src/utils/AsyncStorageHelpers"
 import styles from "./styles"
 class LoginScreen extends Component {
 
