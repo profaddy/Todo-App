@@ -16,10 +16,15 @@ const Tabs = createBottomTabNavigator({
     defaultNavigationOptions:({navigation}) =>({
 
         tabBarIcon:() => {
-            console.log("test")
             const { routeName } = navigation.state;
-            return <ImageRenderer iconName={"TabOne"}/>
-            
+            switch(routeName){
+                case "Tab1":
+                        return <ImageRenderer iconName={"TabOne"}/>
+                case "Tab2":
+                        return <ImageRenderer iconName={"TabTwo"}/>
+                default:
+                        return <ImageRenderer iconName={"TabOne"}/>
+            }
         }
     })
 },{

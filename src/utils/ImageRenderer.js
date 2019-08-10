@@ -5,9 +5,9 @@ class ImageRenderer extends Component {
     render() {
         const { onIconClick, iconName, styles } = this.props
         const path = {
-            MenuIcon: require("../assets/MenuIcon.png"),
-            TabOne: require("../assets/Tab.svg"),
-            TabTwo: require("../assets/Tab.svg"),
+            MenuIcon: require("app/src/assets/MenuIcon.png"),
+            TabOne: require("app/src/assets/Tab.png"),
+            TabTwo: require("app/src/assets/Tab.png"),
         }
         return (
 
@@ -22,5 +22,7 @@ class ImageRenderer extends Component {
         );
     }
 }
+
+// const ImageRenderer = () => <Image source={  }> </Image>
 
 export default ImageRenderer;
